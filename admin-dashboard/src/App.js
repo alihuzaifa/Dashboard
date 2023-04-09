@@ -7,7 +7,8 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Dashboard from "./scenes/dashboard";
 import Layout from "./scenes/layout";
 import Products from "scenes/product";
-import Customers from "scenes/product/customer";
+import Customers from "scenes/customer";
+import Transaction from "scenes/transaction";
 
 const App = () => {
   const mode = useSelector((state) => state?.global?.mode);
@@ -26,6 +27,7 @@ const App = () => {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/products" element={<Products />} />
               <Route path="/customers" element={<Customers />} />
+              <Route path="/transactions" element={<Transaction />} />
             </Route>
           </Routes>
         </ThemeProvider>

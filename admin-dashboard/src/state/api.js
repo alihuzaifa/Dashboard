@@ -6,7 +6,7 @@ import baseUrl from "commonUnit";
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   reducerPath: "adminApi",
-  tagTypes: ["User", "Products"],
+  tagTypes: ["User", "Products", "Customers"],
   endpoints: (build) => ({
     getUser: build.query({
       query: (id) => `general/user/${id}`,
@@ -16,8 +16,13 @@ export const api = createApi({
       query: () => "client/products",
       providesTags: ["Products"],
     }),
+    getCustomers: build.query({
+      query: () => "client/customers",
+      providesTags: ["Customers"],
+    }),
   }),
 });
 
 // useGetUserQuery IT IS COMING FROM GET USER WE JUST ADD PREFIXES (use) AND SUFFIIXES (Query) WITH IT
-export const { useGetUserQuery, useGetProductsQuery } = api;
+export const { useGetUserQuery, useGetProductsQuery, useGetCustomersQuery } =
+  api;

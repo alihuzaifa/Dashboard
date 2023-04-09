@@ -12,7 +12,6 @@ const Layout = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
   const userId = useSelector((state) => state?.global?.userId);
   const { data } = useGetUserQuery(userId);
-  console.log("🚀 ~ file: index.js:17 ~ Layout ~ user:", data);
 
   return (
     <Box
