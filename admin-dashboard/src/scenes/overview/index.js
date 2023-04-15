@@ -9,6 +9,7 @@ const Overview = () => {
         title={"Overview"}
         subtitle={"Overview of general revenue and profit"}
       />
+      <Box></Box>
     </Box>
   );
 };
