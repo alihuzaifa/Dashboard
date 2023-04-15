@@ -7,7 +7,6 @@ import { useGetCustomersQuery } from "state/api";
 const Customers = () => {
   const { data, isLoading } = useGetCustomersQuery();
   const theme = useTheme();
-  console.log("🚀 ~ file: index.js:7 ~ Customers ~ data:", data);
   const columns = [
     {
       field: "_id",

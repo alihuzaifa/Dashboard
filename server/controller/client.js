@@ -36,26 +36,24 @@ export const getCustomers = async (req, res) => {
 
 export const getTransactions = async (req, res) => {
   try {
-    const { page = 1, pageSize = 20, sort = null, search = "" } = req?.query;
-    console.log("🚀  sort:", sort);
-    const generatedSort = () => {
-      const sortParsed = JSON.parse(sort);
-      console.log("🚀 sortParsed:", sortParsed);
-      const sortFormtted = {
-        [sortFormtted?.field]: sortParsed?.sort == "asc" ? 1 : -1,
-      };
-      return sortFormtted;
-    };
+    // sort should look like this: { "field": "userId", "sort": "desc"}
+    const { page = 1, pageSize = 20, sort = null, search = "" } = req.query;
 
-    const sortFormatted = Boolean(sort) ? generatedSort() : {};
-    console.log(
-      "🚀 ~ file: client.js:49 ~ getTransactions ~ sortFormatted:",
-      sortFormatted
-    );
+    // formatted sort should look like { userId: -1 }
+    const generateSort = () => {
+      const sortParsed = JSON.parse(sort);
+      const sortFormatted = {
+        [sortParsed.field]: (sortParsed.sort = "asc" ? 1 : -1),
+      };
+
+      return sortFormatted;
+    };
+    const sortFormatted = Boolean(sort) ? generateSort() : {};
+
     const transactions = await Transaction.find({
       $or: [
         { cost: { $regex: new RegExp(search, "i") } },
-        { userId: { $regex: new RegExp(search, "i") } }, //
+        { userId: { $regex: new RegExp(search, "i") } },
       ],
     })
       .sort(sortFormatted)
@@ -71,6 +69,6 @@ export const getTransactions = async (req, res) => {
       total,
     });
   } catch (error) {
-    res.status(404).json(error?.message);
+    res.status(404).json({ message: error.message });
   }
 };
