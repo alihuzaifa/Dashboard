@@ -6,7 +6,7 @@ import baseUrl from "commonUnit";
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   reducerPath: "adminApi",
-  tagTypes: ["User", "Products", "Customers", "Transactions"],
+  tagTypes: ["User", "Products", "Customers", "Transactions", "Geography"],
   endpoints: (build) => ({
     getUser: build.query({
       query: (id) => `general/user/${id}`,
@@ -27,8 +27,10 @@ export const api = createApi({
         params: { page, pageSize, sort, search },
       }),
       providesTags: ["Transactions"],
-      // query: () => "client/customers",
-      // providesTags: ["Customers"],
+    }),
+    getGeography: build.query({
+      query: () => "client/geography",
+      providesTags: ["Geography"],
     }),
   }),
 });
@@ -39,4 +41,5 @@ export const {
   useGetProductsQuery,
   useGetCustomersQuery,
   useGetTransactionsQuery,
+  useGetGeographyQuery,
 } = api;
