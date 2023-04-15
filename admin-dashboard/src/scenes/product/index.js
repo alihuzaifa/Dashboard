@@ -14,7 +14,6 @@ import {
 import { useGetProductsQuery } from "state/api";
 import Header from "components/Header";
 import { ThreeDots } from "react-loader-spinner";
-import FlexBetween from "components/FlexBetween";
 
 const Product = ({
   id,

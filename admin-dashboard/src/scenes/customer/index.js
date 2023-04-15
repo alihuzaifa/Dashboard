@@ -1,7 +1,7 @@
 import { Box, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
-import React, { useState } from "react";
+import React from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { useGetCustomersQuery } from "state/api";
 const Customers = () => {

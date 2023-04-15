@@ -75,7 +75,7 @@ export const getTransactions = async (req, res) => {
   }
 };
 
-export const getGeography = async () => {
+export const getGeography = async (req,res) => {
   try {
     const users = await User.find();
     // In summary, the code is using reduce() to count the number of users in each country and storing the result in a new object mappedLocations. This object has country codes as keys and the number of users as values.
@@ -87,7 +87,7 @@ export const getGeography = async () => {
       acc[countryISO3]++;
       return acc;
     }, {});
-    console.log("🚀 mappedLocations:", mappedLocations);
+    // console.log("🚀 mappedLocations:", mappedLocations);
 
     const formattedLocations = Object.entries(mappedLocations)?.map(
       ([country, count]) => {
@@ -95,7 +95,7 @@ export const getGeography = async () => {
       }
     );
     res.status(200).json(formattedLocations);
-    console.log("🚀formattedLocations:", formattedLocations);
+    // console.log("🚀formattedLocations:", formattedLocations);
   } catch (error) {
     res.status(401).json(error.message);
   }
