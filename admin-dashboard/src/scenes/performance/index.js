@@ -3,10 +3,13 @@ import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
 import React from "react";
 import { ThreeDots } from "react-loader-spinner";
-import { useGetAdminQuery } from "state/api";
+import { useSelector } from "react-redux";
+import { useGetPerformanceQuery } from "state/api";
 
 const Performance = () => {
-  const { data, isLoading } = useGetAdminQuery();
+  const { userId } = useSelector((state) => state?.global);
+  const { data, isLoading } = useGetPerformanceQuery(userId);
+  console.log("🚀data:", data);
   const theme = useTheme();
   const columns = [
     {
@@ -15,37 +18,27 @@ const Performance = () => {
       flex: 1,
     },
     {
-      field: "name",
-      headerName: "Name",
+      field: "userId",
+      headerName: "User ID",
       flex: 1,
     },
     {
-      field: "email",
-      headerName: "Email",
+      field: "createdAt",
+      headerName: "CreatedAt",
       flex: 1,
     },
     {
-      field: "phoneNumber",
-      headerName: "Phone Number",
+      field: "products",
+      headerName: "# of Products",
       flex: 0.5,
-      renderCell: (params) => {
-        return params.value.replace(/^(\d{3})(\d{3})(\d{4})/, "($1)$2-$3");
-      },
+      sortable: false,
+      renderCell: (params) => params.value.length,
     },
     {
-      field: "country",
-      headerName: "Country",
-      flex: 0.4,
-    },
-    {
-      field: "occupation",
-      headerName: "Occupation",
+      field: "cost",
+      headerName: "Cost",
       flex: 1,
-    },
-    {
-      field: "role",
-      headerName: "Role",
-      flex: 0.5,
+      renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
     },
   ];
   return (
@@ -84,10 +77,10 @@ const Performance = () => {
           }}
         >
           <DataGrid
-            rows={data || []}
-            columns={columns}
-            getRowId={(row) => row?._id}
             loading={isLoading || !data}
+            getRowId={(row) => row._id}
+            rows={(data && data.sales) || []}
+            columns={columns}
           />
         </Box>
       ) : (
