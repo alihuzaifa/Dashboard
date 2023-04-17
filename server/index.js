@@ -22,7 +22,9 @@ import {
   dataProduct,
   dataProductStat,
   dataOverallStat,
+  dataAffiliateStat,
 } from "./data/index.js";
+import AffiliateStat from "./models/AffiliateStat.js";
 
 /* CONFIGURATION */
 dotenv.config();
@@ -60,5 +62,6 @@ mongoose
     // User.insertMany(dataUser);
     // Transaction.insertMany(dataTransaction);
     // OverallStat.insertMany(dataOverallStat);
+    // AffiliateStat.insertMany(dataAffiliateStat);
   })
   .catch((error) => console.log(`${error} did not connect`));
