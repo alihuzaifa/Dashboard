@@ -27,7 +27,27 @@ Overall, the code "flex={'1 1 100%'}" means that the element should grow and shr
       borderRadius={"0.55rem"}
     >
       <FlexBetween>
-        <Typography variant="h6" />
+        <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
+          {title || "title"}
+        </Typography>
+        {icon || "icon"}
+      </FlexBetween>
+      <Typography
+        variant="h3"
+        fontWeight={"600"}
+        sx={{ color: theme.palette.secondary[200] }}
+      >
+        {value || "empty"}
+      </Typography>
+      <FlexBetween gap={"1rem"}>
+        <Typography
+          variant="h5"
+          fontStyle={"italic"}
+          sx={{ color: theme.palette.secondary.light }}
+        >
+          {increase || "10%"}
+        </Typography>
+        <Typography>{description || "no description"}</Typography>
       </FlexBetween>
     </Box>
   );
